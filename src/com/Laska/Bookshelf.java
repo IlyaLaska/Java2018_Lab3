@@ -1,7 +1,6 @@
 package com.Laska;
 
 public class Bookshelf {
-    private int length;
     private Book[] books;
 
     /**
@@ -10,26 +9,33 @@ public class Bookshelf {
      * @param length - intialises books array of this size
      */
     Bookshelf(int length) {
-        this.length = length;
         this.books = new Book[length];
     }
 
-    Bookshelf(int length, Book[] books) {
-        this.length = length;
+    Bookshelf(Book[] books) {
         this.books = books;
+    }
+
+    /**
+     * @return the size of the Book array
+     */
+    int getSize() {
+        return this.books.length;
+    }
+
+    Book[] getBooks() {
+        return books;
     }
 
     @Override
     public String toString() {
-        if (length == 0) return new String("The bookshelf is empty");
-        StringBuilder out = new StringBuilder();
-//        String outShelf = "";
+        if (this.books.length == 0) return "The bookshelf is empty";
+        StringBuilder outString = new StringBuilder();
         for (Book book : books) {
-            out.append(book).append("\n");
-//            outShelf += book + " ";
+            outString.append(book).append("\n");
         }
-        out.deleteCharAt(out.length() - 1);//cleaning last \n
-        return out.toString();
+        outString.deleteCharAt(outString.length() - 1);//cleaning last \n
+        return outString.toString();
     }
 
     /**
@@ -40,14 +46,14 @@ public class Bookshelf {
      */
     Bookshelf booksByAuthor(String author) {
         int matches = 0;
-        for (int i = 0; i < length; i++) {
-            if (books[i].getAuthor().equals(author)) matches++;
+        for (Book book : this.books) {
+            if (book.getAuthor().equals(author)) matches++;
         }
         if (matches == 0) return new Bookshelf(0);//empty Bookshelf if no matches found
 
         Bookshelf outBookshelf = new Bookshelf(matches);
         int outPos = 0;
-        for (int i = 0; i < length; i++) {
+        for (int i = 0; i < this.books.length; i++) {
             if (books[i].getAuthor().equals(author)) {
                 outBookshelf.books[outPos] = books[i];
                 outPos++;
@@ -64,14 +70,14 @@ public class Bookshelf {
      */
     Bookshelf booksByPublisher(String publisher) {
         int matches = 0;
-        for (int i = 0; i < length; i++) {
-            if (books[i].getPublisher().equals(publisher)) matches++;
+        for (Book book : this.books) {
+            if (book.getPublisher().equals(publisher)) matches++;
         }
         if (matches == 0) return new Bookshelf(0);//empty Bookshelf if no matches found
 
         Bookshelf outBookshelf = new Bookshelf(matches);
         int outPos = 0;
-        for (int i = 0; i < length; i++) {
+        for (int i = 0; i < this.books.length; i++) {
             if (books[i].getPublisher().equals(publisher)) {
                 outBookshelf.books[outPos] = books[i];
                 outPos++;
@@ -88,14 +94,14 @@ public class Bookshelf {
      */
     Bookshelf booksLaterThan(int releaseDate) {
         int matches = 0;
-        for (int i = 0; i < length; i++) {
-            if (books[i].getReleaseDate() > releaseDate) matches++;
+        for (Book book : this.books) {
+            if (book.getReleaseDate() > releaseDate) matches++;
         }
         if (matches == 0) return new Bookshelf(0);//empty Bookshelf if no matches found
 
         Bookshelf outBookshelf = new Bookshelf(matches);
         int outPos = 0;
-        for (int i = 0; i < length; i++) {
+        for (int i = 0; i < this.books.length; i++) {
             if (books[i].getReleaseDate() > releaseDate) {
                 outBookshelf.books[outPos] = books[i];
                 outPos++;
