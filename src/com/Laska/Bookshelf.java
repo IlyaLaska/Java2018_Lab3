@@ -1,5 +1,7 @@
 package com.Laska;
 
+import java.lang.reflect.Array;
+
 public class Bookshelf {
     private Book[] books;
 
@@ -13,7 +15,7 @@ public class Bookshelf {
     }
 
     Bookshelf(Book[] books) {
-        this.books = books;
+        this.books = books.clone();
     }
 
     /**
